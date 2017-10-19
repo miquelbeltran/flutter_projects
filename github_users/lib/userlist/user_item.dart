@@ -30,7 +30,7 @@ class UserItem extends StatelessWidget {
         titleContainer,
       ],
     );
-    return new GestureDetector(
+    return new InkWell(
       onTap: () {
         _onTap(context);
       },
