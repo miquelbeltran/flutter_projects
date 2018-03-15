@@ -5,8 +5,6 @@ import 'dart:io';
 const String baseUrl = "api.github.com";
 const String getUsersUrl = "/users";
 
-GitHubService gitHubService = new GitHubService();
-
 class GitHubService {
   HttpClient _httpClient = new HttpClient();
 

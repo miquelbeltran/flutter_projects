@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_playground/github_service.dart';
+import 'package:test_playground/github_service_context.dart';
 
 class NetworkText extends StatefulWidget {
 
@@ -13,10 +14,15 @@ class _NetworkTextState extends State<NetworkText> {
 
   String _text = "initial";
 
+  var _gitHubServiceContext;
+
   @override
   void initState() {
     super.initState();
-    gitHubService.getUsers(0).then((users) {
+  }
+
+  void _load() {
+    _gitHubServiceContext.gitHubService.getUsers(0).then((users) {
       setState(() {
         _text = users[0].username;
       });
@@ -25,6 +31,8 @@ class _NetworkTextState extends State<NetworkText> {
 
   @override
   Widget build(BuildContext context) {
+    _gitHubServiceContext = GitHubServiceContext.of(context);
+    _load();
     return new Text(_text, textDirection: TextDirection.ltr);
   }
 }
