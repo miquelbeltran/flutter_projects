@@ -16,11 +16,6 @@ class _NetworkTextState extends State<NetworkText> {
 
   var _gitHubServiceContext;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void _load() {
     _gitHubServiceContext.gitHubService.getUsers(0).then((users) {
       setState(() {
