@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_playground/github_service.dart';
-import 'package:test_playground/github_service_context.dart';
+import 'package:test_playground/service_locator.dart';
 import 'package:test_playground/network_text.dart';
 
 void main() => runApp(new MyApp());
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return new GitHubServiceContext(
+    return new ServiceLocator(
       gitHubService: new GitHubService(),
       child: new MaterialApp(
         title: 'Flutter Demo',

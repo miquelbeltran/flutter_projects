@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:test_playground/github_service.dart';
-import 'package:test_playground/github_service_context.dart';
+import 'package:test_playground/service_locator.dart';
 import 'package:test_playground/network_text.dart';
 
 
@@ -21,7 +21,7 @@ void main() {
       WidgetTester tester) async {
 
     await tester.pumpWidget(
-        new GitHubServiceContext(
+        new ServiceLocator(
           gitHubService: new GitHubServiceMock(),
           child: new NetworkText(),
         )
