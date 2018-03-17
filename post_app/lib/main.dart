@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:post_app/post_value.dart';
+import 'package:post_app/post_widget.dart';
 
 void main() => runApp(new MyApp());
 
@@ -24,17 +26,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
+const _posts = const <Post>[
+  const Post(
+      title: "Roof party vaporware post-ironic",
+      body: "Fingerstache +1 farm-to-table, green juice hot chicken fam tbh franzen narwhal vice listicle hell of offal flannel. Ramps readymade asymmetrical leggings. Butcher adaptogen vape, kitsch prism organic jianbing shabby chic austin four loko VHS synth tousled. Four dollar toast sartorial schlitz meh heirloom, salvia normcore photo booth.",
+      author: "Distillery cold-pressed"
+  ),
+  const Post(
+      title: "vaporware vape enamel pin",
+      body: "Fam slow-carb pop-up aesthetic organic next level post-ironic cold-pressed tumeric messenger bag banjo viral stumptown. Art party banh mi kitsch, vegan pop-up godard farm-to-table master cleanse messenger bag typewriter. Kinfolk venmo four dollar toast, art party occupy vegan williamsburg photo booth intelligentsia try-hard hell of etsy edison bulb. Iceland polaroid ramps portland banjo wolf. Seitan lo-fi art party, vape shaman vegan heirloom schlitz iPhone jianbing vaporware fam.",
+      author: "Pour-over slow-carb iPhone celiac"
+  )
+];
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -43,128 +49,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 var _white1 = new Color(0xFFEDEDE9);
-var _white2 = new Color(0xFFD7D7D7);
-var _black1 = new Color(0xFF9C9C9C);
-
-
-class Header extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Container(
-      child: new Row(
-        children: <Widget>[
-          new Expanded(
-            child: new Padding(
-              padding: new EdgeInsets.all(8.0),
-              child: new Text(
-                "Mitteilung - Frage",
-                style: new TextStyle(color: _black1),
-              ),
-            ),
-          ),
-          new Padding(
-            padding: new EdgeInsets.all(8.0),
-            child: new Image(
-                image: new AssetImage("images/ic_info.png")),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Line extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Container(
-      decoration: new BoxDecoration(color: _white2),
-      height: 1.0,
-    );
-  }
-}
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return new Scaffold(
       appBar: new AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: new Text(widget.title),
       ),
-      body: new Container(
-        decoration: new BoxDecoration(color: _white1),
-        child: new Column(
-          children: <Widget>[
-            new Padding(
-              padding: new EdgeInsets.all(8.0),
-              child: new Card(
-                child: new Column(
-                  children: <Widget>[
-                    new Header(),
-                    new Line(),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
+      body: new ListView.builder(
+          itemBuilder: (context, index) => new PostWidget(_posts[index]),
+          itemCount: _posts.length,
+          padding: new EdgeInsets.symmetric(vertical: 8.0)
       ),
 
-//      new Center(
-//        // Center is a layout widget. It takes a single child and positions it
-//        // in the middle of the parent.
-//        child: new Column(
-//          // Column is also layout widget. It takes a list of children and
-//          // arranges them vertically. By default, it sizes itself to fit its
-//          // children horizontally, and tries to be as tall as its parent.
-//          //
-//          // Invoke "debug paint" (press "p" in the console where you ran
-//          // "flutter run", or select "Toggle Debug Paint" from the Flutter tool
-//          // window in IntelliJ) to see the wireframe for each widget.
-//          //
-//          // Column has various properties to control how it sizes itself and
-//          // how it positions its children. Here we use mainAxisAlignment to
-//          // center the children vertically; the main axis here is the vertical
-//          // axis because Columns are vertical (the cross axis would be
-//          // horizontal).
-//          mainAxisAlignment: MainAxisAlignment.center,
-//          children: <Widget>[
-//            new Text(
-//              'You have pushed the button this many times:',
-//            ),
-//            new Text(
-//              '$_counter',
-//              style: Theme.of(context).textTheme.display1,
-//            ),
-//          ],
-//        ),
-//      ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
