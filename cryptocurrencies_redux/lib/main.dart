@@ -32,7 +32,7 @@ class CryptoApp extends StatelessWidget {
               return new StoreBuilder<AppState>(
                 onInit: (store) => store.dispatch(new CryptosLoadAction()),
                 builder: (context, store) {
-                  return new HomeScreen();
+                  return new CrytosListScreen();
                 },
               );
             }
