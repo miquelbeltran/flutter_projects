@@ -4,6 +4,7 @@ import 'package:cryptocurrencies_redux/crypto/cryptos_reducer.dart';
 AppState appReducer(AppState state, action) {
   return new AppState(
     cryptos: cryptosReducer(state.cryptos, action),
+    loadCompleter: cryptosLoadReducer(state.loadCompleter, action)
   );
 }
 

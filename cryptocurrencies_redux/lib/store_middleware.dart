@@ -23,6 +23,7 @@ Middleware<AppState> _createLoadCryptos(CryptosRepository repository) {
       store.dispatch(
           new CryptosLoadedAction(cryptos)
       );
+      store.state.loadCompleter?.complete();
     }).catchError((error) {
       store.dispatch(new CryptosNotLoadedAction());
       print(error);

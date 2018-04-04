@@ -1,6 +1,14 @@
+import 'dart:async';
+
 import 'package:cryptocurrencies_redux/crypto/crypto.dart';
 
-class CryptosLoadAction {}
+class CryptosLoadAction {
+  Completer completer;
+
+  CryptosLoadAction({
+    this.completer
+  });
+}
 
 class CryptosLoadedAction {
   List<Crypto> cryptos;

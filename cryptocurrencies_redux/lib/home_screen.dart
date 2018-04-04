@@ -35,8 +35,8 @@ class _ViewModel {
   static _ViewModel fromStore(Store<AppState> store) {
     return new _ViewModel(
       cryptos: store.state.cryptos,
-      onRefresh: () {
-        store.dispatch(new CryptosLoadAction());
+      onRefresh: (completer) {
+        store.dispatch(new CryptosLoadAction(completer: completer));
       }
     );
   }
@@ -44,7 +44,7 @@ class _ViewModel {
 
 class _CryptosList extends StatelessWidget {
   final List<Crypto> cryptos;
-  final Function onRefresh;
+  final Function(Completer) onRefresh;
 
   _CryptosList({
     this.cryptos,
@@ -52,8 +52,8 @@ class _CryptosList extends StatelessWidget {
   });
 
   Future<Null> _onRefresh() {
-    Completer<Null> completer = new Completer();
-    onRefresh();
+    var completer = new Completer();
+    onRefresh(completer);
     return completer.future;
   }
 
