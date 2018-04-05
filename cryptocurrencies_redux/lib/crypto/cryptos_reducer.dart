@@ -18,10 +18,3 @@ List<Crypto> _setNotLoadedCryptos(List<Crypto> crypto, CryptosNotLoadedAction ac
   return [];
 }
 
-final cryptosLoadReducer = combineTypedReducers<Completer>([
-  new ReducerBinding<Completer, CryptosLoadAction>(_setCompleterLoadCryptos),
-]);
-
-Completer _setCompleterLoadCryptos(state, CryptosLoadAction action) {
-  return action.completer;
-}
