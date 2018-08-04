@@ -17,10 +17,16 @@ final _backgroundColor = Colors.green[100];
 /// While it is named CategoryRoute, a more apt name would be CategoryScreen,
 /// because it is responsible for the UI at the route's destination.
 // TODO: Make CategoryRoute a StatefulWidget
-class CategoryRoute extends StatelessWidget {
+class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
 
-  // TODO: Create State object for the CategoryRoute
+  @override
+  CategoryRouteState createState() {
+    return new CategoryRouteState();
+  }
+}
+
+class CategoryRouteState extends State<CategoryRoute> {
 
   static const _categoryNames = <String>[
     'Length',
@@ -43,6 +49,22 @@ class CategoryRoute extends StatelessWidget {
     Colors.purpleAccent,
     Colors.red,
   ];
+
+  final categories = <Category>[];
+
+  @override
+  void initState() {
+    super.initState();
+    categories.clear();
+    for (var i = 0; i < _categoryNames.length; i++) {
+      categories.add(Category(
+        name: _categoryNames[i],
+        color: _baseColors[i],
+        iconLocation: Icons.cake,
+        units: _retrieveUnitList(_categoryNames[i]),
+      ));
+    }
+  }
 
   /// Makes the correct number of rows for the list view.
   ///
@@ -72,16 +94,7 @@ class CategoryRoute extends StatelessWidget {
     // the list at initialization (in initState()).
     // This way, you also don't have to pass in the list of categories to
     // _buildCategoryWidgets()
-    final categories = <Category>[];
 
-    for (var i = 0; i < _categoryNames.length; i++) {
-      categories.add(Category(
-        name: _categoryNames[i],
-        color: _baseColors[i],
-        iconLocation: Icons.cake,
-        units: _retrieveUnitList(_categoryNames[i]),
-      ));
-    }
 
     final listView = Container(
       color: _backgroundColor,
