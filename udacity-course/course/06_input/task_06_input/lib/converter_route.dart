@@ -63,6 +63,16 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        InputField(label: "Input"),
+        UnitPicker(units: widget.units),
+        InputField(label: "Output"),
+        TextField(),
+      ],
+    );
+
     // TODO: Create the 'input' group of widgets. This is a Column that includes
     // includes the output value, and 'from' unit [Dropdown].
 
@@ -95,6 +105,58 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
     return ListView(
       children: unitWidgets,
+    );
+  }
+}
+
+class UnitPicker extends StatelessWidget {
+  const UnitPicker({
+    Key key,
+    @required this.units,
+  }) : super(key: key);
+
+  final List<Unit> units;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(width: 1.0),
+        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+            items: units.map((Unit unit) {
+              return DropdownMenuItem<Unit>(
+                value: unit,
+                child: Text(unit.name),
+              );
+            }).toList(),
+            onChanged: (Unit unit) {},
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class InputField extends StatelessWidget {
+  final String label;
+
+  const InputField({Key key, this.label}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextField(
+        decoration: new InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(),
+        ),
+      ),
     );
   }
 }
