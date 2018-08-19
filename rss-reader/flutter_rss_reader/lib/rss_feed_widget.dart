@@ -57,26 +57,54 @@ class RssItemWidget extends StatelessWidget {
           left: 16.0,
           right: 16.0,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: <Widget>[
-            Text(
-              item.title,
-              textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.subhead,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                _parseDate(item.pubDate),
-                style: TextStyle(
-                  fontSize: 12.0,
-                  color: Colors.grey,
-                ),
-              ),
-            )
+            buildDateText(),
+            buildTitleText(context),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildTitleText(BuildContext context) {
+    return Flexible(
+      child: Text(
+        item.title,
+        textAlign: TextAlign.start,
+        style: Theme.of(context).textTheme.subhead,
+      ),
+    );
+  }
+
+  Widget buildDateText() {
+    DateFormat format = new DateFormat("EEE, dd MMM yyyy hh:mm:ss Z");
+    var date = format.parse(item.pubDate);
+    var topFormat = DateFormat('EEEE');
+    var midFormat = DateFormat('dd MMMM');
+    var botFormat = DateFormat('HH:mm');
+    var style = TextStyle(
+      fontSize: 12.0,
+      color: Colors.grey,
+    );
+    return Container(
+      width: 72.0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Text(
+            topFormat.format(date),
+            style: style,
+          ),
+          Text(
+            midFormat.format(date),
+            style: style,
+          ),
+          Text(
+            botFormat.format(date),
+            style: style,
+          ),
+        ],
       ),
     );
   }
@@ -87,12 +115,5 @@ class RssItemWidget extends StatelessWidget {
     } else {
       print('Could not launch ${item.link}');
     }
-  }
-
-  String _parseDate(String pubDate) {
-    DateFormat format = new DateFormat("EEE, dd MMM yyyy hh:mm:ss Z");
-    var date = format.parse(pubDate);
-    var outFormat = DateFormat('HH:mm - EEEE, dd MMMM');
-    return outFormat.format(date);
   }
 }
