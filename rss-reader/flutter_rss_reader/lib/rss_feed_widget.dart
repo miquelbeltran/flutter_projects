@@ -52,7 +52,7 @@ class RssItemWidget extends StatelessWidget {
       onTap: _launchURL,
       child: Padding(
         padding: const EdgeInsets.only(
-          top: 8.0,
+          top: 16.0,
           bottom: 8.0,
           left: 16.0,
           right: 16.0,
@@ -63,9 +63,7 @@ class RssItemWidget extends StatelessWidget {
             Text(
               item.title,
               textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 16.0,
-              ),
+              style: Theme.of(context).textTheme.subhead,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
