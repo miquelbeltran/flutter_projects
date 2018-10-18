@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studyjam_todoapp/todo.dart';
+import 'package:studyjam_todoapp/todo_row.dart';
 
 void main() => runApp(TodoApp());
 
@@ -40,7 +41,7 @@ class TodoApp extends StatelessWidget {
         ),
         body: ListView.builder(
           itemCount: _todos.length,
-          itemBuilder: (context, index) => Text(_todos[index].title),
+          itemBuilder: (context, index) => TodoRow(todo: _todos[index]),
         ),
       ),
     );
